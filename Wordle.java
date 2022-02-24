@@ -10,15 +10,6 @@ public class Wordle {
     public static void main(String[] args) throws IOException {
         Wordle main = new Wordle();
         main.playGame();
-        System.out.println("Would you like to play again? (1 for yes, 2 for no)");
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        if (choice == 1) {
-            main.playGame();
-        } else {
-            System.exit(0);
-        }
     }
 
 
@@ -81,7 +72,7 @@ public class Wordle {
         Set<Character> matchNoPos = new HashSet<Character>();
         Set<Character> incorrect = new HashSet<Character>();
 
-        while (!hasWon) {
+        while (true) {
             if (tries >= 6) {
                 System.out.println("You have exhausted all of your tries.  You lose.  Correct answer was " + target);
                 System.out.println("Would you like to play again? (1 for yes, 2 for no)");
@@ -101,7 +92,15 @@ public class Wordle {
 
             if (guess.equals(target)) {
                 System.out.println("That's correct!");
-                hasWon = true;
+                System.out.println("Would you like to play again? (1 for yes, 2 for no)");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+
+                if (choice == 1) {
+                    playGame();
+                } else {
+                    System.exit(0);
+                }
             } else {
                 for (int i = 0; i < guess.length(); i++) { // traverses guess
                     for (int j = 0; j < target.length(); j++) { // traverses target
