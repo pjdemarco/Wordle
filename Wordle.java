@@ -66,8 +66,6 @@ public class Wordle {
         String[] words = loadWords();
         String target = chooseWord(words);
 
-        boolean hasWon = false;
-
         char[] match = new char[5];
         Set<Character> matchNoPos = new HashSet<Character>();
         Set<Character> incorrect = new HashSet<Character>();
@@ -75,15 +73,7 @@ public class Wordle {
         while (true) {
             if (tries >= 6) {
                 System.out.println("You have exhausted all of your tries.  You lose.  Correct answer was " + target);
-                System.out.println("Would you like to play again? (1 for yes, 2 for no)");
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-
-                if (choice == 1) {
-                    playGame();
-                } else {
-                    System.exit(0);
-                }
+                playAgain();
             }
 
             System.out.println("Try number " + (tries+1) + " of 6");
@@ -92,15 +82,7 @@ public class Wordle {
 
             if (guess.equals(target)) {
                 System.out.println("That's correct!");
-                System.out.println("Would you like to play again? (1 for yes, 2 for no)");
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-
-                if (choice == 1) {
-                    playGame();
-                } else {
-                    System.exit(0);
-                }
+                playAgain();
             } else {
                 for (int i = 0; i < guess.length(); i++) { // traverses guess
                     for (int j = 0; j < target.length(); j++) { // traverses target
@@ -160,5 +142,17 @@ public class Wordle {
             }
         }
         return contains;
+    }
+
+    public void playAgain() throws IOException {
+        System.out.println("Would you like to play again? (1 for yes, 2 for no)");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (choice == 1) {
+            playGame();
+        } else {
+            System.exit(0);
+        }
     }
 }
