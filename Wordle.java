@@ -18,7 +18,6 @@ public class Wordle {
         int counter = 0;
         FileReader fr = new FileReader("sgb-words.txt");
         BufferedReader br = new BufferedReader(fr);
-
         String line = br.readLine();
 
         while (line != null) {
@@ -31,11 +30,8 @@ public class Wordle {
 
     public String chooseWord(String[] words) {
         String word;
-
         Random rand = new Random();
-
         word = words[rand.nextInt(5757)];
-
         return word;
     }
 
@@ -65,7 +61,6 @@ public class Wordle {
         int tries = 0;
         String[] words = loadWords();
         String target = chooseWord(words);
-
         char[] match = new char[5];
         Set<Character> matchNoPos = new HashSet<Character>();
         Set<Character> incorrect = new HashSet<Character>();
